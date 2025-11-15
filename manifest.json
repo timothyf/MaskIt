@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "MaskIt",
+  "version": "1.0",
+  "description": "Create draggable, resizable masks to blur or hide parts of any webpage. Masks persist across page reloads and navigation.",
+  "permissions": ["scripting", "activeTab"],
+  "action": {
+    "default_title": "Activate MaskIt"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "commands": {
+    "add-mask": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0"
+      },
+      "description": "Add a new mask to the current page"
+    }
+  }
+}

@@ -5,16 +5,15 @@ This document explains the modular architecture of the MaskIt extension.
 ## File Structure
 
 ```
-MaskIt-Chrome-extension/
+MaskIt/
 ├── manifest.json          # Extension manifest
 ├── background.js          # Background service worker
-├── inject-new.js          # Main content script orchestrator
+├── inject.js              # Main content script orchestrator
 ├── storage.js             # LocalStorage utilities
 ├── mask-utils.js          # Mask DOM manipulation utilities
 ├── context-menu.js        # Context menu UI and handlers
 ├── mask-creator.js        # Mask creation and interactions
-├── navigation.js          # URL change detection and handlers
-└── inject.js             # (Original monolithic file - can be removed)
+└── navigation.js          # URL change detection and handlers
 ```
 
 ## Module Descriptions
@@ -81,12 +80,12 @@ Handles URL changes, page transitions, and auto-save.
 - beforeunload/pagehide handlers
 - Race condition prevention during navigation
 
-### 6. **inject-new.js**
+### 6. **inject.js**
 Main orchestrator that initializes all modules and coordinates functionality.
 
 **Responsibilities:**
 - Check if already initialized (fast path)
-- Setup global functions (`__blurblockRemoveAll`, `__blurblockCreateMask`)
+- Setup global functions (`__maskitRemoveAll`, `__maskitCreateMask`)
 - Inject page navigation hooks
 - Restore masks on page load
 - Listen for messages from background script
@@ -104,7 +103,7 @@ Main orchestrator that initializes all modules and coordinates functionality.
 
 ### On User Action (Button Click):
 1. `background.js` injects scripts + sends "addNewMask" message
-2. `inject-new.js` receives message
+2. `inject.js` receives message
 3. Calls `createMaskFromData({})` to create new mask
 4. Mask is immediately saved via `saveMasksFor()`
 
@@ -127,12 +126,12 @@ Main orchestrator that initializes all modules and coordinates functionality.
 
 ## Migration Notes
 
-The original monolithic `inject.js` file (620+ lines) has been split into 6 focused modules:
+The original monolithic file has been split into 6 focused modules:
 - `storage.js` (~50 lines)
 - `mask-utils.js` (~60 lines)
 - `context-menu.js` (~280 lines)
 - `mask-creator.js` (~190 lines)
 - `navigation.js` (~120 lines)
-- `inject-new.js` (~70 lines)
+- `inject.js` (~70 lines)
 
 The functionality remains identical, but the code is now much more organized and maintainable.

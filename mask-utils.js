@@ -2,22 +2,22 @@
  * Utilities for capturing and removing mask DOM elements
  */
 
-if (typeof window.__blurblockMaskUtilsLoaded === 'undefined') {
-  window.__blurblockMaskUtilsLoaded = true;
+if (typeof window.__maskitMaskUtilsLoaded === 'undefined') {
+  window.__maskitMaskUtilsLoaded = true;
 
 /**
  * Capture all mask data from the DOM
  * @returns {Array} Array of mask data objects
  */
 function captureDomMasks() {
-  const nodes = document.querySelectorAll('[id^="blurblock-mask-"]');
+  const nodes = document.querySelectorAll('[id^="maskit-mask-"]');
   const result = [];
   nodes.forEach((node) => {
     const style = node.style;
     const backdrop = style.backdropFilter || style.webkitBackdropFilter || "";
-    const background = style.background || "";
+    const background = style.background;
     
-    console.log('[BlurBlock] Raw styles - backdropFilter:', style.backdropFilter, 'webkitBackdropFilter:', style.webkitBackdropFilter, 'background:', background);
+    console.log('[MaskIt] Raw styles - backdropFilter:', style.backdropFilter, 'webkitBackdropFilter:', style.webkitBackdropFilter, 'background:', background);
     
     // Determine mode: if backdrop filter has blur, it's blur mode; otherwise solid
     const hasBlurFilter = backdrop && backdrop.includes("blur(") && backdrop !== "none";
@@ -45,7 +45,7 @@ function captureDomMasks() {
       opacity: opacity,
     };
     
-    console.log('[BlurBlock] Captured mask:', maskData, 'hasBlurFilter:', hasBlurFilter);
+    console.log('[MaskIt] Captured mask:', maskData, 'hasBlurFilter:', hasBlurFilter);
     result.push(maskData);
   });
   return result;
@@ -55,9 +55,9 @@ function captureDomMasks() {
  * Remove all mask and context menu elements from the DOM
  */
 function removeDomMasks() {
-  document.querySelectorAll('[id^="blurblock-mask-"]').forEach((m) => m.remove());
-  document.querySelectorAll('[id^="blurblock-context-menu-"]').forEach((m) => m.remove());
-  window.__blurblockMaskCount = 0;
+  document.querySelectorAll('[id^="maskit-mask-"]').forEach((m) => m.remove());
+  document.querySelectorAll('[id^="maskit-context-menu-"]').forEach((m) => m.remove());
+  window.__maskitMaskCount = 0;
 }
 
 /**

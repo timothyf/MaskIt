@@ -2,8 +2,8 @@
  * Navigation handling for URL changes and page transitions
  */
 
-if (typeof window.__blurblockNavigationLoaded === 'undefined') {
-  window.__blurblockNavigationLoaded = true;
+if (typeof window.__maskitNavigationLoaded === 'undefined') {
+  window.__maskitNavigationLoaded = true;
 
 /**
  * Setup navigation handlers for URL changes
@@ -23,7 +23,7 @@ function setupNavigationHandlers(currentUrl) {
       
       const oldUrl = currentUrl;
       const currentMasks = captureDomMasks();
-      console.log('[BlurBlock] URL changed from', oldUrl.href, 'to', location.href);
+      console.log('[MaskIt] URL changed from', oldUrl.href, 'to', location.href);
       saveMasksFor(oldUrl, currentMasks);
       removeDomMasks();
 
@@ -44,7 +44,7 @@ function setupNavigationHandlers(currentUrl) {
     }
 
     // case 2: URL same but masks got wiped by hydration
-    const domMasks = document.querySelectorAll('[id^="blurblock-mask-"]');
+    const domMasks = document.querySelectorAll('[id^="maskit-mask-"]');
     const saved = loadMasksFor(currentUrlObj);
     if (!domMasks.length && saved && saved.length) {
       saved.forEach((m) => createMaskFromData(m, currentUrlObj));

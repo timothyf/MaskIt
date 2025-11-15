@@ -13,7 +13,7 @@ const scriptFiles = [
 
 // Helper function to inject the script for auto-restore
 function injectScriptForRestore(tabId) {
-  console.log('[BlurBlock] Auto-injecting for restore on tab', tabId);
+  console.log('[MaskIt] Auto-injecting for restore on tab', tabId);
   chrome.scripting.executeScript({
     target: { tabId: tabId },
     files: scriptFiles
@@ -44,7 +44,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.url && 
       (tab.url.startsWith('http://') || tab.url.startsWith('https://'))) {
     
-    console.log('[BlurBlock] Tab', tabId, 'loaded:', tab.url);
+    console.log('[MaskIt] Tab', tabId, 'loaded:', tab.url);
     // Always inject on page load to restore masks (page reload clears the window object)
     injectScriptForRestore(tabId);
     initializedTabs.set(tabId, tab.url);

@@ -3,8 +3,8 @@
  * BASE_Z is defined in context-menu.js and shared via window.BASE_Z
  */
 
-if (typeof window.__blurblockMaskCreatorLoaded === 'undefined') {
-  window.__blurblockMaskCreatorLoaded = true;
+if (typeof window.__maskitMaskCreatorLoaded === 'undefined') {
+  window.__maskitMaskCreatorLoaded = true;
 
 const BASE_Z = window.BASE_Z || 70;
 
@@ -15,12 +15,12 @@ const BASE_Z = window.BASE_Z || 70;
  * @returns {HTMLElement} The created mask element
  */
 function createMaskFromData(data, currentUrl) {
-  if (!window.__blurblockMaskCount) {
-    window.__blurblockMaskCount = 0;
+  if (!window.__maskitMaskCount) {
+    window.__maskitMaskCount = 0;
   }
-  window.__blurblockMaskCount += 1;
-  const maskIndex = window.__blurblockMaskCount;
-  const maskId = "blurblock-mask-" + maskIndex;
+  window.__maskitMaskCount += 1;
+  const maskIndex = window.__maskitMaskCount;
+  const maskId = "maskit-mask-" + maskIndex;
 
   // Initialize state from data
   const state = {
@@ -30,7 +30,7 @@ function createMaskFromData(data, currentUrl) {
     currentOpacity: typeof data.opacity === "number" ? data.opacity : 1,
   };
 
-  console.log('[BlurBlock] Creating mask with data:', data, 'state:', state);
+  console.log('[MaskIt] Creating mask with data:', data, 'state:', state);
 
   // Create mask element
   const blurMask = document.createElement("div");

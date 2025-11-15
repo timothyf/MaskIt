@@ -2,8 +2,8 @@
  * Context menu creation and management
  */
 
-if (typeof window.__blurblockContextMenuLoaded === 'undefined') {
-  window.__blurblockContextMenuLoaded = true;
+if (typeof window.__maskitContextMenuLoaded === 'undefined') {
+  window.__maskitContextMenuLoaded = true;
 
 // Global constant for z-index base (shared with mask-creator.js)
 if (typeof window.BASE_Z === 'undefined') {
@@ -24,7 +24,7 @@ function createContextMenu(blurMask, maskIndex, state, currentUrl) {
   
   // Create context menu container
   const contextMenu = document.createElement("div");
-  contextMenu.id = "blurblock-context-menu-" + maskIndex;
+  contextMenu.id = "maskit-context-menu-" + maskIndex;
   Object.assign(contextMenu.style, {
     position: "fixed",
     display: "none",

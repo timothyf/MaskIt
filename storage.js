@@ -5,7 +5,7 @@
 if (typeof window.__blurblockStorageLoaded === 'undefined') {
   window.__blurblockStorageLoaded = true;
 
-const STORAGE_PREFIX = "__blurblock_masks__";
+const STORAGE_PREFIX = "__maskit_masks__";
 
 /**
  * Generate storage key for a given URL
@@ -40,9 +40,9 @@ function saveMasksFor(urlObj, masks) {
   try {
     const key = storageKeyFor(urlObj);
     localStorage.setItem(key, JSON.stringify(masks));
-    console.log('[BlurBlock] Saved', masks.length, 'mask(s) to', key, 'Current DOM masks:', document.querySelectorAll('[id^="blurblock-mask-"]').length);
+    console.log('[MaskIt] Saved', masks.length, 'mask(s) to', key, 'Current DOM masks:', document.querySelectorAll('[id^="maskit-mask-"]').length);
   } catch (e) {
-    console.error('[BlurBlock] Failed to save masks:', e);
+    console.error('[MaskIt] Failed to save masks:', e);
   }
 }
 

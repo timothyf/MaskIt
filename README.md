@@ -1,6 +1,6 @@
-# BlurBlock
+# MaskIt
 
-**BlurBlock** is a lightweight Chrome extension that lets you add a movable, draggable circular blur or blackout mask anywhere on a webpage.  
+**MaskIt** is a lightweight Chrome extension that lets you add a movable, draggable circular blur or blackout mask anywhere on a webpage.  
 Use it to hide annoying elements such as video instructor faces, ads, watermarks, popups, or any distractions that interfere with your focus.
 
 ---
@@ -23,7 +23,7 @@ Use it to hide annoying elements such as video instructor faces, ads, watermarks
 3. Enable **Developer mode** (toggle in the top right).
 4. Click **Load unpacked**.
 5. Select the folder where you saved the repository files.
-6. The BlurBlock extension should now appear in your toolbar.
+6. The MaskIt extension should now appear in your toolbar.
 
 ### Option 2: (Planned) Publish to Chrome Web Store
 
@@ -35,7 +35,7 @@ Use it to hide annoying elements such as video instructor faces, ads, watermarks
 ## Usage
 
 1. Navigate to any webpage where you want to hide part of the content.
-2. Click the **BlurBlock extension icon** in the Chrome toolbar.
+2. Click the **MaskIt extension icon** in the Chrome toolbar.
 3. A semi-transparent circular blur mask will appear on the page.
 4. Click and drag the mask to position it over the element you want to hide.
 5. Click the extension icon again to add another mask (future updates may change this behavior).

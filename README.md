@@ -1,16 +1,19 @@
 # MaskIt
 
-**MaskIt** is a lightweight Chrome extension that lets you add a movable, draggable circular blur or blackout mask anywhere on a webpage.  
-Use it to hide annoying elements such as video instructor faces, ads, watermarks, popups, or any distractions that interfere with your focus.
+**MaskIt** is a lightweight Chrome extension that lets you create draggable, resizable blur or solid masks anywhere on a webpage.  
+Use it to hide annoying elements such as video instructor faces, ads, watermarks, popups, or any distractions that interfere with your focus. Masks automatically persist across page reloads and navigation.
 
 ---
 
 ## Features
 
-- Add a circular blur or black mask overlay on any webpage.
-- Drag and reposition the mask freely anywhere on the screen.
-- Helps improve focus by hiding unwanted or distracting content.
-- Simple and easy to use — just click the extension icon to activate.
+- **Add Multiple Masks**: Create unlimited masks on any webpage
+- **Drag & Resize**: Click and drag to reposition, use corner handle to resize
+- **Blur or Solid Mode**: Toggle between blur effect (adjustable 0-80px) or solid black (adjustable 0-100% opacity)
+- **Position Control**: Choose between fixed position (stays in view) or absolute (scrolls with content)
+- **Auto-Save**: Masks automatically save and restore on page reload and navigation
+- **Right-Click Menu**: Easy access to mask controls, mode switching, and removal
+- **Keyboard Shortcut**: Press `Ctrl+Shift+0` to quickly add a new mask
 
 ---
 
@@ -34,22 +37,40 @@ Use it to hide annoying elements such as video instructor faces, ads, watermarks
 
 ## Usage
 
-1. Navigate to any webpage where you want to hide part of the content.
-2. Click the **MaskIt extension icon** in the Chrome toolbar.
-3. A semi-transparent circular blur mask will appear on the page.
-4. Click and drag the mask to position it over the element you want to hide.
-5. Click the extension icon again to add another mask (future updates may change this behavior).
+### Creating a Mask
+1. Navigate to any webpage where you want to hide content
+2. Click the **MaskIt extension icon** in the toolbar (or press `Ctrl+Shift+0`)
+3. A blur mask will appear on the page
+
+### Adjusting the Mask
+- **Move**: Click and drag the mask to position it
+- **Resize**: Drag the corner handle to change size
+- **Configure**: Right-click on the mask to open the options menu
+
+### Options Menu (Right-Click)
+- **Close (×)**: Close the options menu
+- **Remove This Mask**: Delete the current mask
+- **Remove All Masks**: Delete all masks on the page
+- **Position Toggle**: Switch between fixed (stays in view) or absolute (scrolls with page)
+- **Mode Toggle**: Switch between blur and solid black
+- **Blur Slider**: Adjust blur intensity (0-80px) when in blur mode
+- **Opacity Slider**: Adjust transparency (0-100%) when in solid mode
+
+### Persistence
+- Masks automatically save to your browser's local storage
+- Reload the page and masks will restore automatically
+- Navigate away and back, masks will be waiting for you
 
 ---
 
 ## Future Improvements
 
-- Resize mask by dragging edges.
-- Toggle visibility with keyboard shortcuts.
-- Save mask position and settings per site.
-- Multiple masks management.
-- Customizable blur strength, color, and shape.
-- Option to remove all masks quickly.
+- Custom shapes (currently rectangular)
+- Custom colors beyond black
+- Export/import mask configurations
+- Sync masks across devices
+- Visual indicator for keyboard shortcut
+- Undo/redo functionality
 
 ---
 

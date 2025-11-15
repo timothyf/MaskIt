@@ -88,7 +88,7 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-Created by Niloy Hasan Nahid — feel free to reach out for questions or feature requests.
+Created by Timothy Fisher — feel free to reach out for questions or feature requests.
 
 ---
 

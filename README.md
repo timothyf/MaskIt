@@ -61,6 +61,16 @@ Use it to hide annoying elements such as video instructor faces, ads, watermarks
 - Reload the page and masks will restore automatically
 - Navigate away and back, masks will be waiting for you
 
+### Settings
+Access settings by right-clicking the extension icon and selecting "Options" or by going to `chrome://extensions/` and clicking "Details" → "Extension options".
+
+Configure defaults for new masks:
+- **Default Blur Amount**: Set the initial blur intensity (0-80px)
+- **Default Opacity**: Set the initial opacity for solid mode (0-100%)
+- **Default Mode**: Choose whether new masks start as blur or solid
+- **Default Position Type**: Choose fixed (stays in view) or absolute (scrolls with page)
+- **Default Size**: Set the initial width and height for new masks
+
 ---
 
 ## Future Improvements

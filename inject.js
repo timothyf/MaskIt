@@ -58,8 +58,19 @@
   // ---------------------------------------------------------------
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "addNewMask") {
-      createMaskFromData({}, win.__maskitCurrentUrl);
-      sendResponse({ success: true });
+      // Refresh settings cache before creating new mask
+      if (typeof window.loadSettings === 'function') {
+        window.loadSettings().then(settings => {
+          window.__maskitSettingsCache = settings;
+          console.log('[MaskIt] Refreshed settings before creating new mask:', settings);
+          createMaskFromData({}, win.__maskitCurrentUrl);
+          sendResponse({ success: true });
+        });
+        return true; // Will respond asynchronously
+      } else {
+        createMaskFromData({}, win.__maskitCurrentUrl);
+        sendResponse({ success: true });
+      }
     }
   });
 

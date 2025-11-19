@@ -22,12 +22,27 @@ function createMaskFromData(data, currentUrl) {
   const maskIndex = window.__maskitMaskCount;
   const maskId = "maskit-mask-" + maskIndex;
 
-  // Initialize state from data
+  // Load settings for defaults (use cached sync version)
+  const settings = typeof window.loadSettingsSync === 'function' ? window.loadSettingsSync() : {
+    defaultBlur: 24,
+    defaultOpacity: 1,
+    defaultMode: 'blur',
+    defaultPositionType: 'absolute',
+    defaultWidth: 300,
+    defaultHeight: 300
+  };
+
+  console.log('[MaskIt] Creating mask #' + maskIndex);
+  console.log('[MaskIt] Input data:', data);
+  console.log('[MaskIt] Loaded settings:', settings);
+  console.log('[MaskIt] Cache status:', window.__maskitSettingsCache);
+
+  // Initialize state from data (use saved data or settings defaults)
   const state = {
-    currentBlur: typeof data.blur === "number" ? data.blur : 60,
-    currentMode: data.mode || "blur",
-    currentPositionType: data.positionType || "fixed",
-    currentOpacity: typeof data.opacity === "number" ? data.opacity : 1,
+    currentBlur: typeof data.blur === "number" ? data.blur : settings.defaultBlur,
+    currentMode: data.mode || settings.defaultMode,
+    currentPositionType: data.positionType || settings.defaultPositionType,
+    currentOpacity: typeof data.opacity === "number" ? data.opacity : settings.defaultOpacity,
   };
 
   console.log('[MaskIt] Creating mask with data:', data, 'state:', state);
@@ -36,8 +51,8 @@ function createMaskFromData(data, currentUrl) {
   const blurMask = document.createElement("div");
   blurMask.id = maskId;
   Object.assign(blurMask.style, {
-    width: data.width || "300px",
-    height: data.height || "300px",
+    width: data.width || settings.defaultWidth + "px",
+    height: data.height || settings.defaultHeight + "px",
     position: state.currentPositionType,
     top: data.top || 100 + maskIndex * 10 + "px",
     left: data.left || 100 + maskIndex * 10 + "px",

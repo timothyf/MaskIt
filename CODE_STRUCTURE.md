@@ -8,8 +8,11 @@ This document explains the modular architecture of the MaskIt extension.
 MaskIt/
 ├── manifest.json          # Extension manifest
 ├── background.js          # Background service worker
+├── settings.html          # Settings page UI
+├── settings.js            # Settings storage utilities
+├── settings-ui.js         # Settings page interaction handlers
 ├── inject.js              # Main content script orchestrator
-├── storage.js             # LocalStorage utilities
+├── storage.js             # LocalStorage utilities for masks
 ├── mask-utils.js          # Mask DOM manipulation utilities
 ├── context-menu.js        # Context menu UI and handlers
 ├── mask-creator.js        # Mask creation and interactions
@@ -18,15 +21,40 @@ MaskIt/
 
 ## Module Descriptions
 
-### 1. **storage.js**
-Handles all localStorage operations for saving and loading mask data.
+### 1. **settings.js**
+Manages user preferences and default values for new masks.
+
+**Functions:**
+- `loadSettings()` - Load settings from localStorage
+- `saveSettings(settings)` - Save settings to localStorage
+- `getSetting(key)` - Get a specific setting value
+- `updateSetting(key, value)` - Update a specific setting
+
+**Default Settings:**
+- `defaultBlur`: 24px
+- `defaultOpacity`: 1 (100%)
+- `defaultMode`: "blur"
+- `defaultPositionType`: "absolute"
+- `defaultWidth`: 300px
+- `defaultHeight`: 300px
+
+### 2. **settings.html** & **settings-ui.js**
+Settings page UI accessible via extension options. Allows users to configure:
+- Default blur amount (0-80px)
+- Default opacity (0-100%)
+- Default mode (blur or solid)
+- Default position type (fixed or absolute)
+- Default mask size (width and height)
+
+### 3. **storage.js**
+Handles all localStorage operations for saving and loading mask data per URL.
 
 **Functions:**
 - `storageKeyFor(urlObj)` - Generate storage key for a URL
 - `loadMasksFor(urlObj)` - Load saved masks for a URL
 - `saveMasksFor(urlObj, masks)` - Save masks for a URL
 
-### 2. **mask-utils.js**
+### 4. **mask-utils.js**
 Utilities for capturing and removing mask DOM elements.
 
 **Functions:**
@@ -34,7 +62,7 @@ Utilities for capturing and removing mask DOM elements.
 - `removeDomMasks()` - Remove all mask elements from DOM
 - `removeAllMasks(currentUrl)` - Remove all masks and clear storage
 
-### 3. **context-menu.js**
+### 5. **context-menu.js**
 Creates and manages the right-click context menu for each mask.
 
 **Functions:**
@@ -53,8 +81,8 @@ Creates and manages the right-click context menu for each mask.
 - Blur slider (0-80px)
 - Opacity slider (0-100%)
 
-### 4. **mask-creator.js**
-Creates mask elements and handles drag/resize interactions.
+### 6. **mask-creator.js**
+Creates mask elements and handles drag/resize interactions. Uses settings for default values.
 
 **Functions:**
 - `createMaskFromData(data, currentUrl)` - Main mask creator
@@ -65,8 +93,9 @@ Creates mask elements and handles drag/resize interactions.
 - Draggable masks (works with both fixed and absolute positioning)
 - Resizable masks via corner handle
 - Auto-save on position/size changes
+- Uses user-configured defaults from settings
 
-### 5. **navigation.js**
+### 7. **navigation.js**
 Handles URL changes, page transitions, and auto-save.
 
 **Functions:**
@@ -94,12 +123,13 @@ Main orchestrator that initializes all modules and coordinates functionality.
 ## Data Flow
 
 ### On Page Load:
-1. `background.js` detects page load → injects all scripts
-2. `inject-new.js` runs → checks if already initialized
-3. Restores masks from `storage.js` via `loadMasksFor()`
-4. Creates mask elements via `mask-creator.js`
-5. Attaches context menus via `context-menu.js`
-6. Starts navigation monitoring via `navigation.js`
+1. `background.js` detects page load → injects all scripts (including settings.js)
+2. `inject.js` runs → checks if already initialized
+3. `settings.js` loads user preferences
+4. Restores masks from `storage.js` via `loadMasksFor()`
+5. Creates mask elements via `mask-creator.js` using user's default settings
+6. Attaches context menus via `context-menu.js`
+7. Starts navigation monitoring via `navigation.js`
 
 ### On User Action (Button Click):
 1. `background.js` injects scripts + sends "addNewMask" message

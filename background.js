@@ -3,6 +3,7 @@ const initializedTabs = new Map(); // tabId -> url
 
 // List of script files to inject in order
 const scriptFiles = [
+  "settings.js",
   "storage.js",
   "mask-utils.js",
   "context-menu.js",

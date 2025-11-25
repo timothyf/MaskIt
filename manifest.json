@@ -3,7 +3,8 @@
   "name": "MaskIt",
   "version": "1.0",
   "description": "Create draggable, resizable masks to blur or hide parts of any webpage. Masks persist across page reloads and navigation.",
-  "permissions": ["scripting", "activeTab", "storage"],
+  "permissions": ["scripting", "activeTab", "storage", "tabs"],
+  "host_permissions": ["http://*/*", "https://*/*"],
   "action": {
     "default_title": "Activate MaskIt"
   },
